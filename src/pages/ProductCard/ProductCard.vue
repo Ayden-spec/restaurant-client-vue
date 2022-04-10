@@ -5,9 +5,18 @@
       <p>Вернуться назад</p>
     </button>
     <div class="product_card">
-      <img src="https://i.imgur.com/9Azjmaf.png" alt="product" />
+      <img
+        src="../../assets/pages/product/back_mobile.png"
+        alt="back"
+        class="product_card_back_img"
+      />
+      <img
+        src="https://i.imgur.com/9Azjmaf.png"
+        alt="product"
+        class="product_card_img"
+      />
       <div class="product_card_info">
-        <div>
+        <div class="product_card_info_decription">
           <h2 class="product_card_info_title">Title</h2>
           <p class="product_card_description">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic ex
@@ -52,17 +61,20 @@
       </div>
     </div>
     <hr class="product_card_hr" />
+    <ObjectList title="С ЭТИМ ТОВАРОМ ПОКУПАЮТ" id="ProductCard" />
     <MapContacts />
   </div>
 </template>
 
 <script>
 import MapContacts from "../../components/Map/Map_Contacts.vue";
+import ObjectList from "../Home/ObjectList.vue";
 
 export default {
   name: "ProductCard",
   components: {
     MapContacts,
+    ObjectList,
   },
 };
 </script>
@@ -92,10 +104,14 @@ export default {
   display: flex;
   flex-direction: row;
   align-self: center;
+  position: relative;
   border-radius: 10px;
   width: 80%;
 }
-.product_card img {
+.product_card_back_img {
+  display: none;
+}
+.product_card_img {
   height: 400px;
   width: 600px;
 }
@@ -186,7 +202,96 @@ export default {
   width: 100%;
   height: 1px;
   border-width: 0;
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(136,136,136,0.6) 50%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(136, 136, 136, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
   margin: 40px 0;
+}
+
+@media (max-width: 1401px) {
+  .product_back_button {
+    margin: 40px 0 30px 6%;
+  }
+  .product_card {
+    width: 90%;
+  }
+  .product_card_img {
+    height: auto;
+    width: 500px;
+  }
+}
+@media (max-width: 1001px) {
+  .product_card_img {
+    width: 50%;
+    height: auto;
+  }
+}
+@media (max-width: 801px) {
+  .product_card_img {
+    width: 45%;
+    height: auto;
+  }
+  .product_card_compound {
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 651px) {
+  .product_back_button {
+    display: none;
+  }
+  .product_card_back_img {
+    position: absolute;
+    display: flex;
+    left: 10px;
+    top: 10px;
+    height: 37px;
+    width: 37px;
+  }
+  .product_card_img {
+    width: 100%;
+    height: auto;
+  }
+  .product_card {
+    flex-direction: column;
+    border-radius: none;
+    width: 100%;
+  }
+  .product_card_info_decription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .product_card_description {
+    text-align: center;
+  }
+  .product_card_info_button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+  }
+  .product_card_compounds {
+    width: 90%;
+    justify-content: space-between;
+  }
+  .product_card_compound {
+    margin-right: 0;
+  }
+  .product_card_info {
+    padding: 20px 10px 20px 10px;
+  }
+}
+@media (max-width: 351px) {
+  .product_card_compounds {
+    width: 100%;
+  }
+  .product_card_info {
+    padding: 20px 5px 20px 5px;
+  }
 }
 </style>
