@@ -1,6 +1,6 @@
 <template>
   <div class="product_sections">
-    <h2>{{ title.toUpperCase() }}</h2>
+    <h2>{{ category.toUpperCase() }}</h2>
     <div
       class="product_sections_scroll_product_card"
       :ref="`scroll_product_card_${id}`"
@@ -22,108 +22,12 @@ export default {
   components: {
     ProductCard,
   },
-  props: ["title", "id"],
+  props: ["category", "id", "array"],
   methods: {
     wheel_product_card(event, id) {
-      this.$refs[`scroll_product_card_${id}`].scrollBy(2 * event.deltaY, 0);
+      this.$refs[`scroll_product_card_${id}`].scrollBy(event.deltaY, 0);
       event.preventDefault();
     },
-  },
-  data() {
-    return {
-      array: [
-        {
-          title: "Индейка",
-          value: "225",
-          price: "450",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 0,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-        {
-          title: "Индейка",
-          value: "230",
-          price: "480",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 1,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-        {
-          title: "Индейка",
-          value: "230",
-          price: "480",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 1,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-        {
-          title: "Индейка",
-          value: "230",
-          price: "480",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 1,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-        {
-          title: "Индейка",
-          value: "230",
-          price: "480",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 1,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-        {
-          title: "Индейка",
-          value: "230",
-          price: "480",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 1,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-        {
-          title: "Индейка",
-          value: "230",
-          price: "480",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 1,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-        {
-          title: "Индейка",
-          value: "230",
-          price: "480",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 1,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-        {
-          title: "Индейка",
-          value: "230",
-          price: "480",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 1,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-        {
-          title: "Индейка",
-          value: "230",
-          price: "480",
-          img: "https://i.imgur.com/9Azjmaf.png",
-          count: 1,
-          description:
-            "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
-        },
-      ],
-    };
   },
 };
 </script>

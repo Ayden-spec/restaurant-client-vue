@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../pages/Home/Home'
 import Basket from '../pages/Basket/Basket'
+import Login from '../pages/Authorization/Login'
+import Registration from '../pages/Authorization/Registration'
 import ProductCard from '../pages/ProductCard/ProductCard'
 
 const routes = [
@@ -10,7 +12,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/product',
+    path: '/product/:id',
     name: 'ProductCard',
     component: ProductCard
   },
@@ -18,6 +20,16 @@ const routes = [
     path: '/basket',
     name: 'Basket',
     component: Basket
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/registration',
+    name: 'Registration',
+    component: Registration
   },
   /*{
     path: '/product',

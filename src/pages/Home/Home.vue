@@ -7,9 +7,14 @@
     />
     <Category />
     <ObjectList
-      v-for="(obj, index) in $store.getters.Categories"
+      v-for="(object, index) in $store.getters.Categories"
       :key="index"
-      :title="obj"
+      :category="object.category_name"
+      :array="
+        $store.getters.Products.filter(
+          (element) => element.category_id === object.category_id
+        )
+      "
       :id="index"
     />
     <MapContacts />
@@ -20,6 +25,7 @@
 import Category from "./Categories.vue";
 import ObjectList from "./ObjectList.vue";
 import MapContacts from "../../components/Map/Map_Contacts.vue";
+import { get_categories_products } from "../../actions/actions";
 
 export default {
   name: "Home",
@@ -30,12 +36,12 @@ export default {
   },
   methods: {
     wheel_product_card(event, index) {
-      this.$refs[`scroll_product_card_${index}`][0].scrollBy(
-        2 * event.deltaY,
-        0
-      );
+      this.$refs[`scroll_product_card_${index}`][0].scrollBy(event.deltaY, 0);
       event.preventDefault();
     },
+  },
+  mounted() {
+    get_categories_products();
   },
 };
 </script>

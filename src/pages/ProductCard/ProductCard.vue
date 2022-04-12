@@ -11,57 +11,60 @@
         class="product_card_back_img"
       />
       <img
-        src="https://i.imgur.com/9Azjmaf.png"
+        :src="$store.getters.Product.image"
         alt="product"
         class="product_card_img"
       />
       <div class="product_card_info">
         <div class="product_card_info_decription">
-          <h2 class="product_card_info_title">Title</h2>
+          <h2 class="product_card_info_title">
+            {{ $store.getters.Product.name }}
+          </h2>
           <p class="product_card_description">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic ex
-            dolores atque dolore iusto dicta, mollitia molestias, tempore
-            pariatur minima esse, aperiam deleniti corrupti non aliquid maiores
-            ipsam qui alias.
+            {{$store.getters.Product.compound}}
           </p>
         </div>
         <div class="product_card_info_button">
-          <p class="product_weight">Вес: 210 г</p>
+          <p class="product_weight">Вес: {{$store.getters.Product.mass}} г</p>
           <div class="product_button_price">
             <button class="product_basket">
               <p>Корзина</p>
               <img src="../../assets/pages/product/basket.png" alt="basket" />
             </button>
-            <h2 class="price">259 ₽</h2>
+            <h2 class="price">{{$store.getters.Product.price}} ₽</h2>
           </div>
           <div class="product_card_compounds">
             <hr />
             <div class="product_card_compound">
               <p class="product_compound_name">Белки</p>
-              <p class="product_compound_value">17.23</p>
+              <p class="product_compound_value">{{$store.getters.Product.squirrels}}</p>
             </div>
             <div class="product_card_compound">
               <p class="product_compound_name">Жиры</p>
-              <p class="product_compound_value">17.23</p>
+              <p class="product_compound_value">{{$store.getters.Product.fats}}</p>
             </div>
             <div class="product_card_compound">
               <p class="product_compound_name">Углеводы</p>
-              <p class="product_compound_value">17.23</p>
+              <p class="product_compound_value">{{$store.getters.Product.carbohydrates}}</p>
             </div>
             <div class="product_card_compound">
               <p class="product_compound_name">Ккал</p>
-              <p class="product_compound_value">17.23</p>
+              <p class="product_compound_value">{{$store.getters.Product.kilocalories}}</p>
             </div>
             <div class="product_card_compound">
               <p class="product_compound_name">Вес</p>
-              <p class="product_compound_value">17.23</p>
+              <p class="product_compound_value">{{$store.getters.Product.mass}}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <hr class="product_card_hr" />
-    <ObjectList title="С ЭТИМ ТОВАРОМ ПОКУПАЮТ" id="ProductCard" />
+    <ObjectList
+      category="С ЭТИМ ТОВАРОМ ПОКУПАЮТ"
+      id="ProductCard"
+      :array="$store.getters.Recomendation"
+    />
     <MapContacts />
   </div>
 </template>
@@ -70,11 +73,17 @@
 import MapContacts from "../../components/Map/Map_Contacts.vue";
 import ObjectList from "../Home/ObjectList.vue";
 
+import { get_product_id, get_recomendation } from "../../actions/actions";
+
 export default {
   name: "ProductCard",
   components: {
     MapContacts,
     ObjectList,
+  },
+  mounted() {
+    get_product_id(this.$route.params.id);
+    get_recomendation();
   },
 };
 </script>
@@ -92,6 +101,7 @@ export default {
   align-items: center;
   background: transparent;
   border: none;
+  width: auto;
   margin: 40px 0 30px 11%;
 }
 .product_back_button img {

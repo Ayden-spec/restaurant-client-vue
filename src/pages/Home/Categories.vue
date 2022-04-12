@@ -6,7 +6,7 @@
       :class="{ active_category: index === active }"
       @click="active = index"
     >
-      {{ category }}
+      {{ category.category_name }}
     </p>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
   methods: {
     categoryWheel(event) {
       if (event.deltaY != 0) {
-        this.$refs.categories.scrollBy(2 * event.deltaY, 0);
+        this.$refs.categories.scrollBy(event.deltaY, 0);
         event.preventDefault();
       }
     },

@@ -1,14 +1,14 @@
 <template>
     <label>
         <p>{{placeholder}}</p>
-        <input type="text" @input="$emit('updateInput', $event.target.value)" :value="value">
+        <input :type="type" @input="$emit('updateInput', $event.target.value)" :value="value">
     </label>
 </template>
 
 <script>
 export default {
     name: 'Input',
-    props:['value', 'placeholder'],
+    props:['value', 'placeholder', 'type'],
 }
 </script>
 
@@ -18,6 +18,7 @@ export default {
         border-radius: 10px;
         padding: 2px 6px;
         display: inline-block;
+        width: 100%;
     }
     p{
         font-size: 13px;

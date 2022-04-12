@@ -23,7 +23,7 @@
       <button class="header_button">
         <img :src="basket" alt="basket" />
         <p class="header_button_text">Корзина</p>
-        <p class="header_button_counter"><strong>4</strong></p>
+        <p class="header_button_counter"><strong>{{ $store.getters.Basket.length }}</strong></p>
       </button>
     </div>
     <label class="header_input_1">

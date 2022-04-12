@@ -4,30 +4,44 @@
       <button>&lt; к выбору блюда</button>
       <div class="basket_title">
         <h1 class="title">КОРЗИНА</h1>
-        <p>(в корзине 3 товара)</p>
+        <p>(в корзине {{ $store.getters.Basket.length }} товара)</p>
       </div>
     </div>
     <div class="basket_list">
+      <h2 v-if="this.$store.getters.Basket.length === 0">КОРЗИНА ПУСТАЯ</h2>
       <!---->
       <div
         class="basket_product_card"
-        v-for="(product, index) in array"
+        v-for="(product, index) in $store.getters.Basket"
         :key="index"
       >
-        <img :src="product.img" alt="product_img" />
+        <img :src="product.image" alt="product_img" />
         <div class="basket_img_descr">
           <div class="basket_list_title_description">
-            <h3>{{ product.title }}</h3>
+            <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>
           </div>
           <div class="basket_interaction">
             <div class="basket_list_interaction">
-              <button class="interaction_button">-</button>
-              <p>1</p>
-              <button class="interaction_button">+</button>
+              <button
+                class="interaction_button"
+                @click="$store.dispatch('basketEditMinus_action', product)"
+              >
+                -
+              </button>
+              <p>{{ product.basket }}</p>
+              <button
+                class="interaction_button"
+                @click="$store.dispatch('basketEditPlus_action', product)"
+              >
+                +
+              </button>
             </div>
             <h3 class="basket_card_price">{{ product.price }} ₽</h3>
-            <button class="interaction_button">
+            <button
+              class="interaction_button"
+              @click="$store.dispatch('basketEditDelete_action', product)"
+            >
               <img src="../../assets/pages/basket/delete.png" alt="X" />
             </button>
           </div>
@@ -45,12 +59,15 @@
         <!---->
         <div
           class="recomendation_card"
-          v-for="(product, index) in recomendation"
+          v-for="(product, index) in $store.getters.Recomendation"
           :key="index"
         >
-          <img :src="product.img" alt="recomendation" />
-          <h5 class="recomendation_title">{{ product.title }}</h5>
-          <button class="recomendation_button_add">
+          <img :src="product.image" alt="recomendation" />
+          <h5 class="recomendation_title">{{ product.name }}</h5>
+          <button
+            class="recomendation_button_add"
+            @click="$store.dispatch('basketEditPlus_action', product)"
+          >
             <p class="recomendation_button_title">Добавить</p>
             <p class="recomendation_button_img">+</p>
           </button>
@@ -64,11 +81,19 @@
       <div>
         <div class="price_row">
           <p class="price_name">Итого:</p>
-          <h3>500 ₽</h3>
+          <h3>
+            {{
+              $store.getters.Basket.map((el) => el.basket * el.price).reduce(
+                (a, b) => a + b,
+                0
+              )
+            }}
+            ₽
+          </h3>
         </div>
         <div class="price_row">
           <p class="delivery_name">До бесплатной доставки не хватет:</p>
-          <p class="delivery_price">100 ₽</p>
+          <p class="delivery_price">{{thinkDeliveryPrice()}} ₽</p>
         </div>
         <div class="price_row">
           <p class="delivery_name">Минимальная сума заказа 1500 ₽</p>
@@ -80,6 +105,8 @@
 </template>
 
 <script>
+import { get_recomendation } from "../../actions/actions";
+
 export default {
   name: "Basket",
   methods: {
@@ -87,58 +114,18 @@ export default {
       this.$refs.basket_recomendation.scrollBy(event.deltaY, 0);
       event.preventDefault();
     },
+    GetBasketProduct() {
+      return false;
+    },
+    thinkDeliveryPrice() {
+      let total_price = this.$store.getters.Basket.map(
+        (el) => el.basket * el.price
+      ).reduce((a, b) => a + b, 0);
+      return 2000 - total_price < 0 ? 0 : 2000 - total_price;
+    },
   },
-  data() {
-    return {
-      array: [
-        {
-          img: "https://i.imgur.com/9Azjmaf.png",
-          title: "ПИЦЦА ДВОЙНАЯ ПЕППЕРОНИ",
-          description:
-            "Кальмары, мидии, креветки, сыр маасдам, красный лук, микс оливок, базилик, соус песто",
-          price: "1640",
-        },
-        {
-          img: "https://i.imgur.com/9Azjmaf.png",
-          title: "ПИЦЦА ДВОЙНАЯ ПЕППЕРОНИ",
-          description:
-            "Кальмары, мидии, креветки, сыр маасдам, красный лук, микс оливок, базилик, соус песто",
-          price: "1640",
-        },
-      ],
-      recomendation: [
-        {
-          img: "https://i.imgur.com/9Azjmaf.png",
-          title: "ПИЦЦА ДВОЙНАЯ ПЕППЕРОНИ",
-          price: "1640",
-        },
-        {
-          img: "https://i.imgur.com/9Azjmaf.png",
-          title: "ПИЦЦА ДВОЙНАЯ ПЕППЕРОНИ",
-          price: "1640",
-        },
-        {
-          img: "https://i.imgur.com/9Azjmaf.png",
-          title: "ПИЦЦА ДВОЙНАЯ ПЕППЕРОНИ",
-          price: "1640",
-        },
-        {
-          img: "https://i.imgur.com/9Azjmaf.png",
-          title: "ПИЦЦА ДВОЙНАЯ ПЕППЕРОНИ",
-          price: "1640",
-        },
-        {
-          img: "https://i.imgur.com/9Azjmaf.png",
-          title: "ПИЦЦА ДВОЙНАЯ ПЕППЕРОНИ",
-          price: "1640",
-        },
-        {
-          img: "https://i.imgur.com/9Azjmaf.png",
-          title: "ПИЦЦА ДВОЙНАЯ ПЕППЕРОНИ",
-          price: "1640",
-        },
-      ],
-    };
+  mounted() {
+    get_recomendation();
   },
 };
 </script>
@@ -179,6 +166,10 @@ export default {
   margin: 20px 10px 40px 0;
 }
 .basket_list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   background: linear-gradient(90deg, #494544 0%, #504b4a 100%);
   align-self: center;
   width: 80%;
@@ -432,8 +423,8 @@ export default {
     justify-content: center;
     margin-top: 10px;
   }
-  .total_price_button{
-      margin-top: 15px;
+  .total_price_button {
+    margin-top: 15px;
   }
   .basket_list_title_description {
     width: 100%;
