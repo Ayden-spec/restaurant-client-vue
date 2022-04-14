@@ -3,7 +3,7 @@ import store from '../store';
 
 
 let domain = 'http://localhost:5000';
-let site_domain = 'http://localhost:3000/';
+let site_domain = 'http://localhost:8080/';
 
 
 export const registration = async (email, password, name, callback) => {

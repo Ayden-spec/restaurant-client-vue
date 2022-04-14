@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="header_container">
-      <h1>LOGOS</h1>
+      <router-link to="/"><h1>LOGOS</h1></router-link>
       <label class="header_input_0">
         <img :src="gps" alt="gps" id="gps" />
         <input type="text" placeholder="Введите адрес доставки" />
@@ -20,11 +20,11 @@
           <p>Войти</p>
         </label>
       </div>
-      <button class="header_button">
+      <router-link class="header_button" to="/basket">
         <img :src="basket" alt="basket" />
         <p class="header_button_text">Корзина</p>
         <p class="header_button_counter"><strong>{{ $store.getters.Basket.length }}</strong></p>
-      </button>
+      </router-link>
     </div>
     <label class="header_input_1">
       <img :src="gps" alt="gps" id="gps" />

@@ -28,6 +28,14 @@ export default createStore({
     SetProduct(state, payload) { state.product = payload },
     SetRecomendation(state, payload) { state.recomendation = payload },
     //////////////////////////////////////////////////////////////////////////////////////
+    BasketEditAdd(state, payload) {
+      let find_object_index = state.basket.findIndex(el => el.product_id === payload.product_id);
+      if (find_object_index === -1) {
+        state.basket.push({ basket: 1, description: payload.description, image: payload.image, name: payload.name, price: payload.price, product_id: payload.product_id });
+        if (state.isAuth) product_add_basket(payload.product_id);
+      }
+      localStorage.setItem('basket', JSON.stringify(state.basket))
+    },
     BasketEditPlus(state, payload) {
       let find_object_index = state.basket.findIndex(el => el.product_id === payload.product_id);
       if (find_object_index === -1) {
@@ -71,6 +79,7 @@ export default createStore({
     setProduct_action({ commit }, payload) { commit('SetProduct', payload) },
     setRecomendation_action({ commit }, payload) { commit('SetRecomendation', payload) },
     //////////////////////////////////////////////////////////////////////////////////////
+    basketEditAdd_action({ commit }, payload) { commit('BasketEditAdd', payload) },
     basketEditPlus_action({ commit }, payload) { commit('BasketEditPlus', payload) },
     basketEditMinus_action({ commit }, payload) { commit('BasketEditMinus', payload) },
     basketEditDelete_action({ commit }, payload) { commit('BasketEditDelete', payload) },

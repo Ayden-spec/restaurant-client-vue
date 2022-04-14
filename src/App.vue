@@ -51,6 +51,7 @@ export default {
   box-sizing: border-box;
   font-family: Gilroy;
   color: white;
+  text-decoration: none;
 }
 #nav {
   background: #555;

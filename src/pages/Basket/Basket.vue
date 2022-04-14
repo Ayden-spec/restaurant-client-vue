@@ -1,7 +1,9 @@
 <template>
   <div class="basket_container">
     <div class="basket_title_back_button">
-      <button>&lt; к выбору блюда</button>
+      <router-link to="/" class="basket_button_back"
+        >&lt; к выбору блюда</router-link
+      >
       <div class="basket_title">
         <h1 class="title">КОРЗИНА</h1>
         <p>(в корзине {{ $store.getters.Basket.length }} товара)</p>
@@ -93,7 +95,7 @@
         </div>
         <div class="price_row">
           <p class="delivery_name">До бесплатной доставки не хватет:</p>
-          <p class="delivery_price">{{thinkDeliveryPrice()}} ₽</p>
+          <p class="delivery_price">{{ thinkDeliveryPrice() }} ₽</p>
         </div>
         <div class="price_row">
           <p class="delivery_name">Минимальная сума заказа 1500 ₽</p>
@@ -138,12 +140,9 @@ export default {
   background: linear-gradient(360deg, #211f20 0%, #44403f 100%);
 }
 .basket_title_back_button {
-  margin-left: 15%;
+  margin: 30px 0 0 15%;
 }
-.basket_title_back_button button {
-  background: transparent;
-  border: none;
-  margin-top: 30px;
+.basket_button_back {
   font-size: 16px;
   font-weight: 700;
   line-height: 19px;

@@ -5,10 +5,11 @@
       alt="preview"
       class="preview_img"
     />
-    <Category />
+    <Category @SetActiveCategory="SetActiveCategory" />
     <ObjectList
       v-for="(object, index) in $store.getters.Categories"
       :key="index"
+      :ref="`object_list_${index}`"
       :category="object.category_name"
       :array="
         $store.getters.Products.filter(
@@ -38,6 +39,13 @@ export default {
     wheel_product_card(event, index) {
       this.$refs[`scroll_product_card_${index}`][0].scrollBy(event.deltaY, 0);
       event.preventDefault();
+    },
+    SetActiveCategory(index) {
+      this.$refs[`object_list_${index}`][0].$el.scrollIntoView({
+        block: "center",
+        inline: "center",
+        behavior: "smooth",
+      });
     },
   },
   mounted() {

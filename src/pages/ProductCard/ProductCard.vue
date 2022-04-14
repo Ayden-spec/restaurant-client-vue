@@ -1,9 +1,9 @@
 <template>
   <div class="product_container">
-    <button class="product_back_button">
+    <router-link class="product_back_button" to="/">
       <img src="../../assets/pages/product/back.png" alt="back" />
       <p>Вернуться назад</p>
-    </button>
+    </router-link>
     <div class="product_card">
       <img
         src="../../assets/pages/product/back_mobile.png"
@@ -21,39 +21,55 @@
             {{ $store.getters.Product.name }}
           </h2>
           <p class="product_card_description">
-            {{$store.getters.Product.compound}}
+            {{ $store.getters.Product.compound }}
           </p>
         </div>
         <div class="product_card_info_button">
-          <p class="product_weight">Вес: {{$store.getters.Product.mass}} г</p>
+          <p class="product_weight">Вес: {{ $store.getters.Product.mass }} г</p>
           <div class="product_button_price">
-            <button class="product_basket">
+            <router-link
+              class="product_basket"
+              to="/basket"
+              @click="
+                $store.dispatch('basketEditAdd_action', $store.getters.Product)
+              "
+            >
               <p>Корзина</p>
               <img src="../../assets/pages/product/basket.png" alt="basket" />
-            </button>
-            <h2 class="price">{{$store.getters.Product.price}} ₽</h2>
+            </router-link>
+            <h2 class="price">{{ $store.getters.Product.price }} ₽</h2>
           </div>
           <div class="product_card_compounds">
             <hr />
             <div class="product_card_compound">
               <p class="product_compound_name">Белки</p>
-              <p class="product_compound_value">{{$store.getters.Product.squirrels}}</p>
+              <p class="product_compound_value">
+                {{ $store.getters.Product.squirrels }}
+              </p>
             </div>
             <div class="product_card_compound">
               <p class="product_compound_name">Жиры</p>
-              <p class="product_compound_value">{{$store.getters.Product.fats}}</p>
+              <p class="product_compound_value">
+                {{ $store.getters.Product.fats }}
+              </p>
             </div>
             <div class="product_card_compound">
               <p class="product_compound_name">Углеводы</p>
-              <p class="product_compound_value">{{$store.getters.Product.carbohydrates}}</p>
+              <p class="product_compound_value">
+                {{ $store.getters.Product.carbohydrates }}
+              </p>
             </div>
             <div class="product_card_compound">
               <p class="product_compound_name">Ккал</p>
-              <p class="product_compound_value">{{$store.getters.Product.kilocalories}}</p>
+              <p class="product_compound_value">
+                {{ $store.getters.Product.kilocalories }}
+              </p>
             </div>
             <div class="product_card_compound">
               <p class="product_compound_name">Вес</p>
-              <p class="product_compound_value">{{$store.getters.Product.mass}}</p>
+              <p class="product_compound_value">
+                {{ $store.getters.Product.mass }}
+              </p>
             </div>
           </div>
         </div>

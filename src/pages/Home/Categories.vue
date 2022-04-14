@@ -4,7 +4,7 @@
       v-for="(category, index) in $store.getters.Categories"
       :key="index"
       :class="{ active_category: index === active }"
-      @click="active = index"
+      @click="setActivCategory(index)"
     >
       {{ category.category_name }}
     </p>
@@ -20,6 +20,10 @@ export default {
     };
   },
   methods: {
+    setActivCategory(index){
+      this.active = index;
+      this.$emit('SetActiveCategory', index)
+    },
     categoryWheel(event) {
       if (event.deltaY != 0) {
         this.$refs.categories.scrollBy(event.deltaY, 0);
