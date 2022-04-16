@@ -23,7 +23,7 @@
       <router-link class="header_button" to="/basket">
         <img :src="basket" alt="basket" />
         <p class="header_button_text">Корзина</p>
-        <p class="header_button_counter"><strong>{{ $store.getters.Basket.length }}</strong></p>
+        <p class="header_button_counter"><strong>{{ BasketCounter }}</strong></p>
       </router-link>
     </div>
     <label class="header_input_1">
@@ -43,6 +43,9 @@ import Auth from "../../assets/header/authorization.svg";
 
 export default {
   name: "Header",
+  computed:{
+    BasketCounter(){ return this.$store.getters.Basket.length}
+  },
   data() {
     return {
       phone: Phone,

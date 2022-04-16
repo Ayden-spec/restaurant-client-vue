@@ -5,11 +5,13 @@
       <p>Вернуться назад</p>
     </router-link>
     <div class="product_card">
+      <router-link to="/">
       <img
         src="../../assets/pages/product/back_mobile.png"
         alt="back"
         class="product_card_back_img"
       />
+      </router-link>
       <img
         :src="$store.getters.Product.image"
         alt="product"

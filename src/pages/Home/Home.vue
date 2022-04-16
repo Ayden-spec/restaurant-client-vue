@@ -36,10 +36,6 @@ export default {
     ObjectList,
   },
   methods: {
-    wheel_product_card(event, index) {
-      this.$refs[`scroll_product_card_${index}`][0].scrollBy(event.deltaY, 0);
-      event.preventDefault();
-    },
     SetActiveCategory(index) {
       this.$refs[`object_list_${index}`][0].$el.scrollIntoView({
         block: "center",

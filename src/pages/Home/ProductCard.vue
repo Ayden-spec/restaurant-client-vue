@@ -1,11 +1,9 @@
 <template>
-  <div class="container_product_card">
-    <router-link :to="`/product/${product.product_id}`">
+  <router-link :to="`/product/${product.product_id}`" class="container_product_card">
       <img :src="product.image" alt="product" />
-    </router-link>
 
-    <div class="product_card_counter" v-if="GetBasketProduct()">
-      <strong>{{ GetBasketProduct().basket }}</strong>
+    <div class="product_card_counter" v-if="GetBasketProduct">
+      <strong>{{ GetBasketProduct.basket }}</strong>
     </div>
 
     <div class="product_card_title_value">
@@ -14,17 +12,17 @@
     </div>
     <p class="product_card_description">{{ product.description }}</p>
 
-    <div class="product_card_buttons" v-if="GetBasketProduct()">
+    <div class="product_card_buttons" v-if="GetBasketProduct">
       <button
         class="product_card_button"
-        @click="$store.dispatch('basketEditMinus_action', product)"
+        @click.stop.prevent="$store.dispatch('basketEditMinus_action', product)"
       >
         -
       </button>
       <p>{{ product.price }} ₽</p>
       <button
         class="product_card_button"
-        @click="$store.dispatch('basketEditPlus_action', product)"
+        @click.stop.prevent="$store.dispatch('basketEditPlus_action', product)"
       >
         +
       </button>
@@ -34,13 +32,13 @@
       <p>{{ product.price }} ₽</p>
       <button
         class="product_card_basket"
-        @click="$store.dispatch('basketEditPlus_action', product)"
+        @click.stop.prevent="$store.dispatch('basketEditPlus_action', product)"
       >
         В корзину
         <img src="../../assets/pages/basket.png" alt="basket" />
       </button>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -49,7 +47,7 @@ export default {
   props: {
     product: Object,
   },
-  methods: {
+  computed: {
     GetBasketProduct() {
       return this.$store.getters.Basket.find(
         (el) => el.product_id === this.$props.product.product_id

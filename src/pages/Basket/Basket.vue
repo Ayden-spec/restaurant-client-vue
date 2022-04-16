@@ -6,11 +6,11 @@
       >
       <div class="basket_title">
         <h1 class="title">КОРЗИНА</h1>
-        <p>(в корзине {{ $store.getters.Basket.length }} товара)</p>
+        <p>(в корзине {{ BasketCounter }} товара)</p>
       </div>
     </div>
     <div class="basket_list">
-      <h2 v-if="this.$store.getters.Basket.length === 0">КОРЗИНА ПУСТАЯ</h2>
+      <h2 v-if="BasketCounter === 0">КОРЗИНА ПУСТАЯ</h2>
       <!---->
       <div
         class="basket_product_card"
@@ -53,11 +53,7 @@
     </div>
     <div class="recomendation">
       <h2 class="recomendation_title">ДОБАВИТЬ К ЗАКАЗУ</h2>
-      <div
-        class="recomendation_list"
-        :ref="`basket_recomendation`"
-        @wheel="wheel_product_card"
-      >
+      <div class="recomendation_list" :ref="`basket_recomendation`" v-scroll>
         <!---->
         <div
           class="recomendation_card"
@@ -83,19 +79,11 @@
       <div>
         <div class="price_row">
           <p class="price_name">Итого:</p>
-          <h3>
-            {{
-              $store.getters.Basket.map((el) => el.basket * el.price).reduce(
-                (a, b) => a + b,
-                0
-              )
-            }}
-            ₽
-          </h3>
+          <h3>{{ TotalPrice }} ₽</h3>
         </div>
         <div class="price_row">
           <p class="delivery_name">До бесплатной доставки не хватет:</p>
-          <p class="delivery_price">{{ thinkDeliveryPrice() }} ₽</p>
+          <p class="delivery_price">{{ thinkDeliveryPrice }} ₽</p>
         </div>
         <div class="price_row">
           <p class="delivery_name">Минимальная сума заказа 1500 ₽</p>
@@ -112,12 +100,21 @@ import { get_recomendation } from "../../actions/actions";
 export default {
   name: "Basket",
   methods: {
-    wheel_product_card(event) {
-      this.$refs.basket_recomendation.scrollBy(event.deltaY, 0);
-      event.preventDefault();
-    },
     GetBasketProduct() {
       return false;
+    },
+  },
+  mounted() {
+    get_recomendation();
+  },
+  computed: {
+    BasketCounter() {
+      return this.$store.getters.Basket.length;
+    },
+    TotalPrice() {
+      return this.$store.getters.Basket.map(
+        (el) => el.basket * el.price
+      ).reduce((a, b) => a + b, 0);
     },
     thinkDeliveryPrice() {
       let total_price = this.$store.getters.Basket.map(
@@ -125,9 +122,6 @@ export default {
       ).reduce((a, b) => a + b, 0);
       return 2000 - total_price < 0 ? 0 : 2000 - total_price;
     },
-  },
-  mounted() {
-    get_recomendation();
   },
 };
 </script>
@@ -263,6 +257,7 @@ export default {
 }
 .recomendation_list::-webkit-scrollbar {
   /* chrome based */
+  display: none;
   width: 0px; /* ширина scrollbar'a */
   height: 0px;
 }

@@ -3,8 +3,7 @@
     <h2>{{ category.toUpperCase() }}</h2>
     <div
       class="product_sections_scroll_product_card"
-      :ref="`scroll_product_card_${id}`"
-      @wheel="wheel_product_card($event, id)"
+      v-scroll
     >
       <ProductCard
         v-for="(product, index) in array"
@@ -23,12 +22,6 @@ export default {
     ProductCard,
   },
   props: ["category", "id", "array"],
-  methods: {
-    wheel_product_card(event, id) {
-      this.$refs[`scroll_product_card_${id}`].scrollBy(event.deltaY, 0);
-      event.preventDefault();
-    },
-  },
 };
 </script>
 
@@ -55,6 +48,7 @@ export default {
 }
 .product_sections_scroll_product_card::-webkit-scrollbar {
   /* chrome based */
+  display: none;
   width: 0px; /* ширина scrollbar'a */
   height: 0px;
 }

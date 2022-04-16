@@ -1,5 +1,5 @@
 <template>
-  <div class="container_categories" ref="categories" @wheel="categoryWheel">
+  <div class="container_categories" v-scroll>
     <p
       v-for="(category, index) in $store.getters.Categories"
       :key="index"
@@ -24,12 +24,6 @@ export default {
       this.active = index;
       this.$emit('SetActiveCategory', index)
     },
-    categoryWheel(event) {
-      if (event.deltaY != 0) {
-        this.$refs.categories.scrollBy(event.deltaY, 0);
-        event.preventDefault();
-      }
-    },
   },
 };
 </script>
@@ -46,6 +40,7 @@ export default {
 
 .container_categories::-webkit-scrollbar {
   /* chrome based */
+  display: none;
   width: 0px; /* ширина scrollbar'a */
   height: 0px;
 }
