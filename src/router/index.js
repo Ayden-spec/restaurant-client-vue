@@ -4,6 +4,7 @@ import Basket from '../pages/Basket/Basket'
 import Login from '../pages/Authorization/Login'
 import Registration from '../pages/Authorization/Registration'
 import ProductCard from '../pages/ProductCard/ProductCard'
+import Ordering from '../pages/Ordering/Ordering'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/registration',
     name: 'Registration',
     component: Registration
+  },
+  {
+    path: '/ordering',
+    name: 'Ordering',
+    component: Ordering
   },
   /*{
     path: '/product',

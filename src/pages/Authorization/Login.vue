@@ -3,36 +3,49 @@
     <div class="auth_div">
       <h2>Авторизация</h2>
       <div class="login_inp">
-        <Input placeholder="Email" :type="'text'" @updateInput="Email = $event" />
+        <Input
+          placeholder="Email"
+          :type="'text'"
+          @updateInput="Email = $event"
+        />
       </div>
       <div class="login_inp">
-        <Input placeholder="Password" :type="'password'" @updateInput="Password = $event" />
+        <Input
+          placeholder="Password"
+          :type="'password'"
+          @updateInput="Password = $event"
+        />
       </div>
-      <button class="login_button" @click="Authorization">Войти</button>
+      <div class="buttons">
+        <button class="button" @click="Authorization">Войти</button>
+        <router-link to="/registration" class="button">Регистрация</router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Input from "../../components/Input/Input.vue";
-import {login} from "../../actions/actions"
+import { login } from "../../actions/actions";
 
 export default {
   name: "Login",
   components: {
     Input,
   },
-  data(){
-      return{
-          Email:'',
-          Password:'',
-      }
+  data() {
+    return {
+      Email: "",
+      Password: "",
+    };
   },
-  methods:{
-      Authorization(){
-          login(this.Email,this.Password,()=>{alert('Готово')})
-      }
-  }
+  methods: {
+    Authorization() {
+      login(this.Email, this.Password, () => {
+        alert("Готово");
+      });
+    },
+  },
 };
 </script>
 
@@ -42,8 +55,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
   background: linear-gradient(360deg, #211f20 0%, #44403f 100%);
+}
+h2 {
+  font-family: Gilroy-ExtraBold;
+  font-weight: 800;
 }
 .auth_div {
   display: flex;
@@ -59,5 +76,38 @@ export default {
 .login_inp {
   width: 90%;
   margin: 10px 0;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-top: 10px;
+}
+.button {
+  border: none;
+  background: rgba(97, 137, 103, 0.6);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: Gilroy-ExtraBold;
+  font-weight: 600;
+}
+
+@media (max-width: 1051px) {
+  .auth_div {
+    width: 50%;
+  }
+}
+@media (max-width: 701px) {
+  .auth_div {
+    width: 80%;
+  }
+}
+@media (max-width: 401px) {
+  .auth_div {
+    width: 95%;
+  }
 }
 </style>

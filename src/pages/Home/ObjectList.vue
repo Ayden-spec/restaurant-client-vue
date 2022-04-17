@@ -1,13 +1,10 @@
 <template>
   <div class="product_sections">
     <h2>{{ category.toUpperCase() }}</h2>
-    <div
-      class="product_sections_scroll_product_card"
-      v-scroll
-    >
+    <div class="product_sections_scroll_product_card" v-scroll>
       <ProductCard
-        v-for="(product, index) in array"
-        :key="index"
+        v-for="product in array"
+        :key="product.product_id"
         :product="product"
       />
     </div>

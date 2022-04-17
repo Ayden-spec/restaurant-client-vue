@@ -14,8 +14,8 @@
       <!---->
       <div
         class="basket_product_card"
-        v-for="(product, index) in $store.getters.Basket"
-        :key="index"
+        v-for="product in $store.getters.Basket"
+        :key="product.product_id"
       >
         <img :src="product.image" alt="product_img" />
         <div class="basket_img_descr">
@@ -57,8 +57,8 @@
         <!---->
         <div
           class="recomendation_card"
-          v-for="(product, index) in $store.getters.Recomendation"
-          :key="index"
+          v-for="product in $store.getters.Recomendation"
+          :key="product.product_id"
         >
           <img :src="product.image" alt="recomendation" />
           <h5 class="recomendation_title">{{ product.name }}</h5>
@@ -89,7 +89,7 @@
           <p class="delivery_name">Минимальная сума заказа 1500 ₽</p>
         </div>
       </div>
-      <button class="total_price_button">Оформить заказ</button>
+      <router-link class="total_price_button" to='/ordering'>Оформить заказ</router-link>
     </div>
   </div>
 </template>

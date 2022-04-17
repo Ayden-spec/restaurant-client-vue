@@ -7,16 +7,16 @@
     />
     <Category @SetActiveCategory="SetActiveCategory" />
     <ObjectList
-      v-for="(object, index) in $store.getters.Categories"
-      :key="index"
-      :ref="`object_list_${index}`"
+      v-for="object in $store.getters.Categories"
+      :key="object.category_id"
+      :ref="`object_list_${object.category_id}`"
       :category="object.category_name"
       :array="
         $store.getters.Products.filter(
           (element) => element.category_id === object.category_id
         )
       "
-      :id="index"
+      :id="object.category_id"
     />
     <MapContacts />
   </div>
@@ -36,8 +36,8 @@ export default {
     ObjectList,
   },
   methods: {
-    SetActiveCategory(index) {
-      this.$refs[`object_list_${index}`][0].$el.scrollIntoView({
+    SetActiveCategory(category_id) {
+      this.$refs[`object_list_${category_id}`][0].$el.scrollIntoView({
         block: "center",
         inline: "center",
         behavior: "smooth",

@@ -19,7 +19,10 @@
           @updateInput="Password = $event"
         />
       </div>
-      <button class="login_button" @click="Authorization">Войти</button>
+      <div class="buttons">
+        <button class="button" @click="Registration">Войти</button>
+        <router-link to="/registration" class="button">Регистрация</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -41,7 +44,7 @@ export default {
     };
   },
   methods: {
-    Authorization() {
+    Registration() {
       registration(this.Email,this.Password,this.Name,()=>{console.log('Готово!')});
     },
   },
@@ -57,6 +60,10 @@ export default {
   height: 80vh;
   background: linear-gradient(360deg, #211f20 0%, #44403f 100%);
 }
+h2 {
+  font-family: Gilroy-ExtraBold;
+  font-weight: 800;
+}
 .auth_div {
   display: flex;
   flex-direction: column;
@@ -71,5 +78,38 @@ export default {
 .login_inp {
   width: 90%;
   margin: 10px 0;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-top: 10px;
+}
+.button {
+  border: none;
+  background: rgba(97, 137, 103, 0.6);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: Gilroy-ExtraBold;
+  font-weight: 600;
+}
+
+@media (max-width: 1051px) {
+  .auth_div {
+    width: 50%;
+  }
+}
+@media (max-width: 701px) {
+  .auth_div {
+    width: 80%;
+  }
+}
+@media (max-width: 401px) {
+  .auth_div {
+    width: 95%;
+  }
 }
 </style>

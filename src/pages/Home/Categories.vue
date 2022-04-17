@@ -1,10 +1,10 @@
 <template>
   <div class="container_categories" v-scroll>
     <p
-      v-for="(category, index) in $store.getters.Categories"
-      :key="index"
-      :class="{ active_category: index === active }"
-      @click="setActivCategory(index)"
+      v-for="category in $store.getters.Categories"
+      :key="category.category_id"
+      :class="{ active_category: category.category_id === active }"
+      @click="setActivCategory(category.category_id)"
     >
       {{ category.category_name }}
     </p>
@@ -16,13 +16,13 @@ export default {
   name: "Category",
   data() {
     return {
-      active: 0,
+      active: 1,
     };
   },
   methods: {
-    setActivCategory(index){
+    setActivCategory(index) {
       this.active = index;
-      this.$emit('SetActiveCategory', index)
+      this.$emit("SetActiveCategory", index);
     },
   },
 };

@@ -15,10 +15,10 @@
             <p class="header_number">+7(917)510-57-59</p>
           </div>
         </div>
-        <label class="header_authorization">
+        <router-link to="/login" class="header_authorization">
           <img :src="auth" alt="authorization" class="authorization_img" />
           <p>Войти</p>
-        </label>
+        </router-link>
       </div>
       <router-link class="header_button" to="/basket">
         <img :src="basket" alt="basket" />

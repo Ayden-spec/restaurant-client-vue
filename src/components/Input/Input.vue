@@ -1,7 +1,7 @@
 <template>
     <label>
         <p>{{placeholder}}</p>
-        <input :type="type" @input="$emit('updateInput', $event.target.value)" :value="value">
+        <input :type="type" @input="$emit('updateInput', $event.target.value.trim())" :value="value">
     </label>
 </template>
 
@@ -14,9 +14,9 @@ export default {
 
 <style scoped>
     label{
-        border: 1px solid #000;
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 10px;
-        padding: 2px 6px;
+        padding: 6px 8px;
         display: inline-block;
         width: 100%;
     }
@@ -28,7 +28,7 @@ export default {
         outline: none;
         border: none;
         background: transparent;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 600;
     }
 </style>
