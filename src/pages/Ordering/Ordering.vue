@@ -6,8 +6,22 @@
     <div class="ordering_form">
       <p class="ordering_form_title">1. Контактная информация</p>
       <div class="ordering_form_inputs">
-        <div class="width_49"><Input placeholder="Имя*" /></div>
-        <div class="width_49"><Input placeholder="Телефон*" /></div>
+        <div class="width_49">
+          <Input
+            placeholder="Имя*"
+            type="text"
+            :value="name"
+            @updateInput="name = $event"
+          />
+        </div>
+        <div class="width_49">
+          <Input
+            placeholder="Телефон*"
+            type="text"
+            :value="phone_number"
+            @updateInput="phone_number = $event"
+          />
+        </div>
       </div>
     </div>
 
@@ -17,41 +31,89 @@
       <div class="ordering_form_selector">
         <div class="ordering_selector">
           <button
-            @click="delivery_selector = 1"
-            :class="{ active_selector_left: delivery_selector === 1 }"
+            @click="delivery_selector = 'delivery'"
+            :class="{ active_selector_left: delivery_selector === 'delivery' }"
           >
             Доставка
           </button>
           <button
-            @click="delivery_selector = 2"
-            :class="{ active_selector_right: delivery_selector === 2 }"
+            @click="delivery_selector = 'pickup'"
+            :class="{ active_selector_right: delivery_selector === 'pickup' }"
           >
             Самовывоз
           </button>
         </div>
 
-        <div class="ordering_form_selector_row" v-if="delivery_selector === 1">
+        <div
+          class="ordering_form_selector_row"
+          v-if="delivery_selector === 'delivery'"
+        >
           <img src="../../assets/pages/ordering/time.png" alt="time" />
           <p>Доставим через 1 час 30 минут</p>
         </div>
       </div>
 
-      <div class="ordering_delivery_address" v-if="delivery_selector === 1">
+      <div
+        class="ordering_delivery_address"
+        v-if="delivery_selector === 'delivery'"
+      >
         <p class="ordering_delivery_address_title">Адрес доставки</p>
 
         <div class="ordering_form_inputs">
-          <div class="width_64"><Input placeholder="Укажите улицу*" /></div>
-          <div class="width_34"><Input placeholder="Номер дома*" /></div>
+          <div class="width_64">
+            <Input
+              placeholder="Укажите улицу*"
+              type="text"
+              :value="street"
+              @updateInput="street = $event"
+            />
+          </div>
+          <div class="width_34">
+            <Input
+              placeholder="Номер дома*"
+              type="text"
+              :value="house_number"
+              @updateInput="house_number = $event"
+            />
+          </div>
         </div>
 
         <div class="ordering_form_inputs">
-          <div class="width_34"><Input placeholder="№ квартиры/офиса" /></div>
-          <div class="width_31"><Input placeholder="Подъезд" /></div>
-          <div class="width_31"><Input placeholder="Этаж" /></div>
+          <div class="width_34">
+            <Input
+              placeholder="№ квартиры/офиса"
+              type="text"
+              :value="apartment_number"
+              @updateInput="apartment_number = $event"
+            />
+          </div>
+          <div class="width_31">
+            <Input
+              placeholder="Подъезд"
+              type="text"
+              :value="entrace"
+              @updateInput="entrace = $event"
+            />
+          </div>
+          <div class="width_31">
+            <Input
+              placeholder="Этаж"
+              type="text"
+              :value="floor"
+              @updateInput="floor = $event"
+            />
+          </div>
         </div>
 
         <div class="ordering_form_inputs">
-          <div class="width_100"><Input placeholder="Комментарий" /></div>
+          <div class="width_100">
+            <Input
+              placeholder="Комментарий"
+              type="text"
+              :value="comment"
+              @updateInput="comment = $event"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -62,29 +124,36 @@
       <div class="ordering_form_selector">
         <div class="ordering_selector">
           <button
-            @click="payed = 1"
-            :class="{ active_selector_left: payed === 1 }"
+            @click="payed = 'online'"
+            :class="{ active_selector_left: payed === 'online' }"
           >
             Онлайн
           </button>
           <button
             class="selector_middle"
-            @click="payed = 2"
-            :class="{ active_selector_middle: payed === 2 }"
+            @click="payed = 'courier'"
+            :class="{ active_selector_middle: payed === 'courier' }"
           >
             Картой
           </button>
           <button
-            @click="payed = 3"
-            :class="{ active_selector_right: payed === 3 }"
+            @click="payed = 'cash'"
+            :class="{ active_selector_right: payed === 'cash' }"
           >
             Наличными
           </button>
         </div>
       </div>
 
-      <div class="ordering_form_inputs" v-if="payed === 3">
-        <div><Input placeholder="Сдача с" type="number" /></div>
+      <div class="ordering_form_inputs" v-if="payed === 'cash'">
+        <div>
+          <Input
+            placeholder="Сдача с"
+            type="number"
+            :value="change"
+            @updateInput="change = $event"
+          />
+        </div>
       </div>
     </div>
 
@@ -94,22 +163,27 @@
       <div class="ordering_form_selector">
         <div class="ordering_selector">
           <button
-            @click="time_delivery = 1"
-            :class="{ active_selector_left: time_delivery === 1 }"
+            @click="time_delivery = 'soon'"
+            :class="{ active_selector_left: time_delivery === 'soon' }"
           >
             Ближайшее время
           </button>
           <button
-            @click="time_delivery = 2"
-            :class="{ active_selector_right: time_delivery === 2 }"
+            @click="time_delivery = 'time'"
+            :class="{ active_selector_right: time_delivery === 'time' }"
           >
             Ко времени
           </button>
         </div>
 
-        <div class="ordering_form_selector_row" v-if="time_delivery === 2">
+        <div class="ordering_form_selector_row" v-if="time_delivery === 'time'">
           <div class="ordering_form_time">
-            <Input placeholder="Укажите время" type="time" />
+            <Input
+              placeholder="Укажите время"
+              type="time"
+              :value="time"
+              @updateInput="time = $event"
+            />
           </div>
         </div>
       </div>
@@ -159,20 +233,47 @@
 <script>
 import Input from "../../components/Input/Input.vue";
 import Checkbox from "../../components/Checkbox/Checkbox.vue";
+import { get_user_info } from "../../actions/actions";
 
 export default {
   components: {
     Input,
     Checkbox,
   },
+  mounted() {
+    get_user_info((element) => {
+      this.name = element.name === null ? "" : element.name;
+      this.street = element.street === null ? "" : element.street;
+      this.apartment_number =
+        element.apartment_number === null ? "" : element.apartment_number;
+      this.entrace = element.entrance === null ? "" : element.entrance;
+      this.phone_number = element.number === null ? "+7" : element.number;
+      this.house_number =
+        element.house_number === null ? "" : element.house_number;
+      this.floor = element.floor === null ? "" : element.floor;
+    });
+  },
   data() {
     return {
-      delivery_selector: 1,
-      payed: 1,
-      time_delivery: 1,
+      delivery_selector: "delivery", // 'delivery', 'pickup'
+      payed: "online", // 'online', 'courier', 'cash'
+      time_delivery: "soon", //'soon', 'time'
       call_checkbox: 1,
       counter: 0,
       agreement: false,
+
+      name: "",
+      phone_number: "+7",
+      street: "",
+      house_number: "",
+      apartment_number: "",
+      entrace: "",
+      floor: "",
+      comment: "",
+
+      change: "",
+
+      time: "",
     };
   },
 };

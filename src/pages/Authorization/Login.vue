@@ -42,9 +42,12 @@ export default {
   methods: {
     Authorization() {
       login(this.Email, this.Password, () => {
-        alert("Готово");
+        this.$router.push("/");
       });
     },
+  },
+  mounted() {
+    if (this.$store.getters.IsAuth) this.$router.push("/");
   },
 };
 </script>

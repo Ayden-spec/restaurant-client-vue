@@ -20,8 +20,8 @@
         />
       </div>
       <div class="buttons">
-        <button class="button" @click="Registration">Войти</button>
-        <router-link to="/registration" class="button">Регистрация</router-link>
+        <router-link to="/login" class="button">Войти</router-link>
+        <button class="button" @click="Registration">Регистрация</button>
       </div>
     </div>
   </div>
@@ -45,8 +45,13 @@ export default {
   },
   methods: {
     Registration() {
-      registration(this.Email,this.Password,this.Name,()=>{console.log('Готово!')});
+      registration(this.Email, this.Password, this.Name, () => {
+        this.$router.push("/login");
+      });
     },
+  },
+  mounted() {
+    if (this.$store.getters.IsAuth) this.$router.push("/");
   },
 };
 </script>

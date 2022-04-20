@@ -29,7 +29,7 @@ export const login = async (email, password, callback) => {
         callback()
         store.dispatch('setIsAuth_action', true)
         localStorage.setItem('token', response.data.token)
-        //window.location.reload()
+        get_basket_user()
     } catch (e) {
         console.log(e)
     }
@@ -145,7 +145,7 @@ export const product_delete_basket = async (product_id) => {
     }
 }
 /*
-export const update_user_info = (name, number, street, house_number, apartment_number, entrance, floor) => {
+export const update_user_info = async (name, number, street, house_number, apartment_number, entrance, floor) => {
     try {
         if (!localStorage.getItem('token')) { return }
         const data = { name, number, street, house_number, apartment_number, entrance, floor }
@@ -158,7 +158,7 @@ export const update_user_info = (name, number, street, house_number, apartment_n
     }
 }
 
-export const add_order = (phone_number, name, delivery_type, street, house_number,
+export const add_order = async (phone_number, name, delivery_type, street, house_number,
     apartment_number, entrance, floor, comment, payment_type, cash_change,
     when_deliver_type, number_persons, time_delivery, call, time, basket) => {
     try {
@@ -175,8 +175,8 @@ export const add_order = (phone_number, name, delivery_type, street, house_numbe
         console.log(e)
     }
 }
-
-export const get_user_info = (callback) => {
+*/
+export const get_user_info = async (callback) => {
     try {
         if (!localStorage.getItem('token')) { return }
         const response = await axios.get(`${domain}/get-user-info?content-type=application/json; charset=utf-8`,
@@ -186,4 +186,4 @@ export const get_user_info = (callback) => {
     } catch (e) {
         console.log(e)
     }
-}*/
+}

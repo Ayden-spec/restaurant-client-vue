@@ -5,6 +5,11 @@
       alt="preview"
       class="preview_img"
     />
+    <img
+      src="../../assets/pages/home/preview_mobile.png"
+      alt="preview"
+      class="preview_img_mobile"
+    />
     <Category @SetActiveCategory="SetActiveCategory" />
     <ObjectList
       v-for="object in $store.getters.Categories"
@@ -56,5 +61,18 @@ export default {
 }
 .preview_img {
   width: 100%;
+}
+.preview_img_mobile {
+  display: none;
+}
+
+@media (max-width: 551px) {
+  .preview_img{
+    display: none;
+  }
+  .preview_img_mobile{
+    display: flex;
+    width: 100%;
+  }
 }
 </style>

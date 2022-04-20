@@ -20,7 +20,12 @@ export default createStore({
     Recomendation(state) { return state.recomendation },
   },
   mutations: {
-    SetIsAuth(state, payload) { state.isAuth = payload },
+    SetIsAuth(state, payload) {
+      state.isAuth = payload;
+      if (!payload) {
+        localStorage.removeItem('token');
+      }
+    },
     SetCategories(state, payload) { state.categories = payload },
     SetProducts(state, payload) { state.products = payload },
     SetBasket(state, payload) { state.basket = payload; localStorage.setItem('basket', JSON.stringify(payload)) },

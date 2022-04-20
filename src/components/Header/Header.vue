@@ -15,15 +15,29 @@
             <p class="header_number">+7(917)510-57-59</p>
           </div>
         </div>
-        <router-link to="/login" class="header_authorization">
+        <router-link
+          to="/login"
+          class="header_authorization"
+          v-if="!$store.getters.IsAuth"
+        >
           <img :src="auth" alt="authorization" class="authorization_img" />
           <p>Войти</p>
         </router-link>
+        <div
+          class="header_authorization"
+          @click="$store.dispatch('setIsAuth_action', false)"
+          v-else
+        >
+          <img :src="logout" alt="authorization" class="authorization_img" />
+          <p>Выйти</p>
+        </div>
       </div>
       <router-link class="header_button" to="/basket">
         <img :src="basket" alt="basket" />
         <p class="header_button_text">Корзина</p>
-        <p class="header_button_counter"><strong>{{ BasketCounter }}</strong></p>
+        <p class="header_button_counter">
+          <strong>{{ BasketCounter }}</strong>
+        </p>
       </router-link>
     </div>
     <label class="header_input_1">
@@ -40,11 +54,14 @@ import Gps from "../../assets/header/gps.png";
 import Search from "../../assets/header/search.png";
 import Basket from "../../assets/header/basket.png";
 import Auth from "../../assets/header/authorization.svg";
+import Logout from "../../assets/header/logout.png";
 
 export default {
   name: "Header",
-  computed:{
-    BasketCounter(){ return this.$store.getters.Basket.length}
+  computed: {
+    BasketCounter() {
+      return this.$store.getters.Basket.length;
+    },
   },
   data() {
     return {
@@ -53,6 +70,7 @@ export default {
       search: Search,
       auth: Auth,
       basket: Basket,
+      logout: Logout,
     };
   },
 };
