@@ -4,11 +4,214 @@ import { product_add_basket, product_plus_basket, product_minus_basket, product_
 export default createStore({
   state: {
     isAuth: false,
-    categories: [],
-    products: [],
+    categories: [
+      { category_id: 1, category_name: 'Горячие закуски', category_description: 'Горячие закуски' },
+      { category_id: 6, category_name: 'Гриль меню', category_description: 'Гриль меню' },
+      { category_id: 3, category_name: 'Мясные блюда', category_description: 'Мясные блюда' },
+      { category_id: 8, category_name: 'Напитки', category_description: 'Напитки' },
+      { category_id: 5, category_name: 'Рыбные блюда', category_description: 'Рыбные блюда' },
+      { category_id: 4, category_name: 'Супы', category_description: 'Супы' },
+      { category_id: 7, category_name: 'Фирменные блюда', category_description: 'Фирменные блюда' },
+      { category_id: 2, category_name: 'Холодные закуски', category_description: 'Холодные закуски' },
+    ],
+    products: [
+      {
+        category_id: 1, product_id: 1, name: 'Индейка', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '450.00',
+        carbohydrates: "22.3",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "15.4",
+        image: "https://i.imgur.com/y9r5vPE.png",
+        kilocalories: "22.5",
+        mass: 250,
+        squirrels: "40.5"
+      },
+      {
+        category_id: 1, product_id: 2, name: 'Ягненок', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '620.00',
+        carbohydrates: "25,2",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "252,2",
+        image: "https://i.imgur.com/3kx3uEm.png",
+        kilocalories: "43.1",
+        mass: 250,
+        squirrels: "155,4"
+      },
+      {
+        category_id: 2, product_id: 2, name: 'Ягненок', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '620.00',
+        carbohydrates: "22.3",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "15.4",
+        image: "https://i.imgur.com/y9r5vPE.png",
+        kilocalories: "22.5",
+        mass: 250,
+        squirrels: "40.5"
+      },
+      {
+        category_id: 2, product_id: 1, name: 'Индейка', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '450.00',
+        carbohydrates: "25,2",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "252,2",
+        image: "https://i.imgur.com/3kx3uEm.png",
+        kilocalories: "43.1",
+        mass: 250,
+        squirrels: "155,4"
+      },
+      {
+        category_id: 3, product_id: 1, name: 'Индейка', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '450.00',
+        carbohydrates: "22.3",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "15.4",
+        image: "https://i.imgur.com/y9r5vPE.png",
+        kilocalories: "22.5",
+        mass: 250,
+        squirrels: "40.5"
+      },
+      {
+        category_id: 3, product_id: 2, name: 'Ягненок', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '620.00',
+        carbohydrates: "25,2",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "252,2",
+        image: "https://i.imgur.com/3kx3uEm.png",
+        kilocalories: "43.1",
+        mass: 250,
+        squirrels: "155,4"
+      },
+      {
+        category_id: 4, product_id: 1, name: 'Индейка', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '450.00',
+        carbohydrates: "22.3",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "15.4",
+        image: "https://i.imgur.com/y9r5vPE.png",
+        kilocalories: "22.5",
+        mass: 250,
+        squirrels: "40.5"
+      },
+      {
+        category_id: 4, product_id: 2, name: 'Ягненок', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '620.00',
+        carbohydrates: "25,2",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "252,2",
+        image: "https://i.imgur.com/3kx3uEm.png",
+        kilocalories: "43.1",
+        mass: 250,
+        squirrels: "155,4"
+      },
+      {
+        category_id: 5, product_id: 1, name: 'Индейка', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '450.00',
+        carbohydrates: "22.3",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "15.4",
+        image: "https://i.imgur.com/y9r5vPE.png",
+        kilocalories: "22.5",
+        mass: 250,
+        squirrels: "40.5"
+      },
+      {
+        category_id: 5, product_id: 2, name: 'Ягненок', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '620.00',
+        carbohydrates: "25,2",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "252,2",
+        image: "https://i.imgur.com/3kx3uEm.png",
+        kilocalories: "43.1",
+        mass: 250,
+        squirrels: "155,4"
+      },
+      {
+        category_id: 6, product_id: 1, name: 'Индейка', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '450.00',
+        carbohydrates: "22.3",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "15.4",
+        image: "https://i.imgur.com/y9r5vPE.png",
+        kilocalories: "22.5",
+        mass: 250,
+        squirrels: "40.5"
+      },
+      {
+        category_id: 6, product_id: 2, name: 'Ягненок', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '620.00',
+        carbohydrates: "25,2",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "252,2",
+        image: "https://i.imgur.com/3kx3uEm.png",
+        kilocalories: "43.1",
+        mass: 250,
+        squirrels: "155,4"
+      },
+      {
+        category_id: 7, product_id: 1, name: 'Индейка', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '450.00',
+        carbohydrates: "22.3",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "15.4",
+        image: "https://i.imgur.com/y9r5vPE.png",
+        kilocalories: "22.5",
+        mass: 250,
+        squirrels: "40.5"
+      },
+      {
+        category_id: 7, product_id: 2, name: 'Ягненок', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '620.00',
+        carbohydrates: "25,2",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "252,2",
+        image: "https://i.imgur.com/3kx3uEm.png",
+        kilocalories: "43.1",
+        mass: 250,
+        squirrels: "155,4"
+      },
+      {
+        category_id: 8, product_id: 1, name: 'Индейка', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '450.00',
+        carbohydrates: "22.3",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "15.4",
+        image: "https://i.imgur.com/y9r5vPE.png",
+        kilocalories: "22.5",
+        mass: 250,
+        squirrels: "40.5"
+      },
+      {
+        category_id: 8, product_id: 2, name: 'Ягненок', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '620.00',
+        carbohydrates: "25,2",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "252,2",
+        image: "https://i.imgur.com/3kx3uEm.png",
+        kilocalories: "43.1",
+        mass: 250,
+        squirrels: "155,4"
+      },
+    ],
     basket: [],
-    product: {},
-    recomendation: [],
+    product: {
+      carbohydrates: "25,2",
+      compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+      description: "Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",
+      fats: "252,2",
+      image: "https://i.imgur.com/3kx3uEm.png",
+      kilocalories: "43.1",
+      mass: 250,
+      name: "Ягненок",
+      price: "620.00",
+      product_id: 2,
+      squirrels: "155,4",
+    },
+    recomendation: [
+      {
+        product_id: 1, name: 'Индейка', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '450.00',
+        carbohydrates: "22.3",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "15.4",
+        image: "https://i.imgur.com/y9r5vPE.png",
+        kilocalories: "22.5",
+        mass: 250,
+        squirrels: "40.5"
+      },
+      {
+        product_id: 2, name: 'Ягненок', description: 'Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком', price: '620.00',
+        carbohydrates: "25,2",
+        compound: "помидор, сыр фета, масло подсолнечное, капуста пекинская, перец сладкий красный, огурцы, оливки без косточек",
+        fats: "252,2",
+        image: "https://i.imgur.com/3kx3uEm.png",
+        kilocalories: "43.1",
+        mass: 250,
+        squirrels: "155,4"
+      },
+    ],
   },
   getters: {
     IsAuth(state) { return state.isAuth },

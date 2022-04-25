@@ -42,7 +42,7 @@ export default {
   methods: {
     Authorization() {
       login(this.Email, this.Password, () => {
-        this.$router.push("/");
+        this.$router.go(-1);
       });
     },
   },

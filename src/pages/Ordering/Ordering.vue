@@ -3,6 +3,10 @@
     <router-link class="ordering_back" to="/basket">&lt; в корзину</router-link>
     <h1 class="ordering_title">ОФОРМЛЕНИЕ ЗАКАЗА</h1>
 
+    <div class="ordering_form_error" v-if="error !== ''">
+      <h3>{{ error }}</h3>
+    </div>
+
     <div class="ordering_form">
       <p class="ordering_form_title">1. Контактная информация</p>
       <div class="ordering_form_inputs">
@@ -179,7 +183,7 @@
         <div class="ordering_form_selector_row" v-if="time_delivery === 'time'">
           <div class="ordering_form_time">
             <Input
-              placeholder="Укажите время"
+              placeholder="Укажите время*"
               type="time"
               :value="time"
               @updateInput="time = $event"
@@ -225,7 +229,7 @@
         />
         <p>Условия</p>
       </div>
-      <button>Оформить заказ</button>
+      <button @click="ChangeForm">Оформить заказ</button>
     </div>
   </div>
 </template>
@@ -233,7 +237,11 @@
 <script>
 import Input from "../../components/Input/Input.vue";
 import Checkbox from "../../components/Checkbox/Checkbox.vue";
-import { get_user_info } from "../../actions/actions";
+import {
+  get_user_info,
+  update_user_info,
+  add_order,
+} from "../../actions/actions";
 
 export default {
   components: {
@@ -259,7 +267,7 @@ export default {
       payed: "online", // 'online', 'courier', 'cash'
       time_delivery: "soon", //'soon', 'time'
       call_checkbox: 1,
-      counter: 0,
+      counter: 1,
       agreement: false,
 
       name: "",
@@ -274,7 +282,69 @@ export default {
       change: "",
 
       time: "",
+
+      error: "",
     };
+  },
+  methods: {
+    ChangeForm() {
+      if (this.delivery_selector === "pickup") {
+        this.street = "";
+        this.house_number = "";
+        this.apartment_number = "";
+        this.entrace = "";
+        this.floor = "";
+        this.comment = "";
+      } else {
+        if (this.street === "" && this.house_number === "") {
+          this.error = "Заполните все поля";
+          return;
+        }
+      }
+      if (this.time_delivery === "time" && this.time === "") {
+        this.error = "Заполните все поля";
+        return;
+      }
+      if (!this.agreement) {
+        this.error = "Дайте согласие на обработку персональных данных";
+        return;
+      }
+      if(this.$store.getters.Basket.length === 0){
+        this.error = "Корзину пустая!";
+        return
+      }
+      this.error = "";
+      if (this.$store.getters.IsAuth) {
+        update_user_info(
+          this.name,
+          this.phone_number,
+          this.street,
+          this.house_number,
+          this.apartment_number,
+          this.entrace,
+          this.floor
+        );
+      }
+      add_order(
+        this.phone_number,
+        this.name,
+        this.delivery_selector,
+        this.street,
+        this.house_number,
+        this.apartment_number,
+        this.entrace,
+        this.floor,
+        this.comment,
+        this.payed,
+        this.change,
+        this.time_delivery,
+        this.counter,
+        this.time,
+        this.call_checkbox,
+        this.time,
+        this.$store.getters.Basket
+      );
+    },
   },
 };
 </script>
@@ -441,6 +511,23 @@ export default {
 .ordering_form_selector_row {
   display: flex;
   align-items: center;
+}
+
+.ordering_form_error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  background: white;
+  align-self: center;
+}
+.ordering_form_error h3 {
+  color: #cc1e1e;
+  font-family: Gilroy-ExtraBold;
+  font-weight: 500;
 }
 
 @media (max-width: 1051px) {
